@@ -1,5 +1,6 @@
 import '@mantine/core/styles.css';
-import { AppShell, Box, Container, createTheme, Group, MantineProvider, Title, type MantineColorsTuple } from '@mantine/core';
+import { AppShell, Box, Flex, Container, createTheme, Group, MantineProvider, Title, type MantineColorsTuple, Text } from '@mantine/core';
+import { NavLinks } from './components';
 
 const myColor: MantineColorsTuple = [
   '#f1f4fe',
@@ -30,9 +31,12 @@ function App() {
         padding="md"
         >
           <AppShell.Header withBorder={true} style={{ borderColor: theme!.colors!.myColor![4] }} >
-            <Group bg="black" c="white" h="100%" px="md">
-              RAG DEMO
-            </Group>
+            <Flex bg="black" c="white" h="100%" justify="space-between">
+              <Group bg="black" c="white" h="100%" px="md">
+                <Text fw={700}>RAG DEMO</Text>
+              </Group>
+              <NavLinks />
+            </Flex>
           </AppShell.Header>
           <AppShell.Main>
             <Container p="lg">
