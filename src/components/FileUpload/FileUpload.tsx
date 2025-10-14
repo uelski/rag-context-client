@@ -1,14 +1,11 @@
-import { useState } from "react";
-import { Box, Button, FileInput, Flex, Text, Title, Loader } from "@mantine/core";
+import { Box, FileInput, Flex, Text, Title, Loader } from "@mantine/core";
+import { useFileUpload } from "./useFileUpload";
+import { UploadedFilesList } from "../";
 
 export function FileUpload() {
-    const [files, setFiles] = useState<File[]>([]);
-    const [loading, setLoading] = useState(false);
-    const onFileUpload = (files: File[]) => {
-        console.log(files);
-        setFiles(files);
-        setLoading(true);
-    }
+
+    const { files, filenames, onFileUpload, loading } = useFileUpload();
+
     return (
         <Box>
             <Title mb="sm" mt="md" fz="xl" c="white">File Upload</Title>
@@ -24,7 +21,7 @@ export function FileUpload() {
                     placeholder="File Upload"
                 />
             )}
-            
+            <UploadedFilesList files={filenames} />
         </Box>
     );
 }

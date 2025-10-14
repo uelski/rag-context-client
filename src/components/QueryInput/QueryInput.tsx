@@ -1,15 +1,14 @@
-import { Box, Textarea, Title, Text } from "@mantine/core";
-import { useState } from "react";
+import { Box, Textarea, Title, Text, Button } from "@mantine/core";
+import { useQueryInput } from "./useQueryInput";
+
 export function QueryInput() {
-    const [query, setQuery] = useState("");
-    const onQueryChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
-        setQuery(event.target.value);
-    }
+    const { query, onQueryChange, onQuerySubmit } = useQueryInput();
     return (
         <Box>
             <Title mb="sm" mt="md" fz="xl" c="white">Query Input</Title>
             <Text c="white">Ask about your uploaded documents</Text>
             <Textarea c="white" label="Query" placeholder="Enter your query" value={query} onChange={onQueryChange} />
+            <Button c="white" onClick={onQuerySubmit}>Submit</Button>
         </Box>
     );
 }

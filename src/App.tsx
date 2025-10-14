@@ -1,6 +1,7 @@
 import '@mantine/core/styles.css';
 import { AppShell, Box, Flex, Container, createTheme, Group, MantineProvider, Title, type MantineColorsTuple, Text } from '@mantine/core';
 import { NavLinks, FileUpload, QueryInput } from './components';
+import { QueryProvider } from './QueryContext';
 
 const myColor: MantineColorsTuple = [
   '#f1f4fe',
@@ -40,9 +41,11 @@ function App() {
           </AppShell.Header>
           <AppShell.Main>
             <Container p="lg">
+              <QueryProvider>
                 <Title c="white" ta="center">File Upload and Query</Title>
                 <FileUpload />
                 <QueryInput />
+              </QueryProvider>
             </Container>
 
           </AppShell.Main>

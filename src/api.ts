@@ -18,7 +18,7 @@ export async function postFile(file: File) {
 
 // post a query string as q
 export async function postQuery(query: string) {
-    const r = await fetch(`${API}/query`, {
+    const r = await fetch(`${API}/query_documents`, {
         method: "POST",
         body: JSON.stringify({q: query}),
     });
