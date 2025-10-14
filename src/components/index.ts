@@ -2,3 +2,4 @@ export * from "./NavLinks/NavLinks";
 export * from "./FileUpload/FileUpload";
 export * from "./QueryInput/QueryInput";
 export * from "./UploadedFilesList/UploadedFilesList";
+export * from "./QueryResponse/QueryResponse";

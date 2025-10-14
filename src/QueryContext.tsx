@@ -13,6 +13,9 @@ type QueryContextType = {
   clearFilenames: () => void;
 
   clearAll: () => void;
+
+  loading: boolean;
+  setLoading: (loading: boolean) => void;
 };
 
 const QueryContext = createContext<QueryContextType | undefined>(undefined);
@@ -21,7 +24,7 @@ export const QueryProvider: React.FC<React.PropsWithChildren> = ({ children }) =
   const [query, setQuery] = useState("");
   const [response, setResponse] = useState("");
   const [filenames, setFilenames] = useState<string[]>([]);
-
+  const [loading, setLoading] = useState(false);
   const addFilename = (name: string) => {
     const trimmed = name.trim();
     if (!trimmed) return;
@@ -40,6 +43,7 @@ export const QueryProvider: React.FC<React.PropsWithChildren> = ({ children }) =
     setQuery("");
     setResponse("");
     setFilenames([]);
+    setLoading(false);
   };
 
   const value = useMemo<QueryContextType>(
@@ -53,8 +57,10 @@ export const QueryProvider: React.FC<React.PropsWithChildren> = ({ children }) =
       removeFilename,
       clearFilenames,
       clearAll,
+      loading,
+      setLoading,
     }),
-    [query, response, filenames]
+    [query, response, filenames, loading]
   );
 
   return <QueryContext.Provider value={value}>{children}</QueryContext.Provider>;
