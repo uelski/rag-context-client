@@ -4,7 +4,7 @@ import { UploadedFilesList } from "../";
 
 export function FileUpload() {
 
-    const { files, filenames, onFileUpload, loading } = useFileUpload();
+    const { files, uploadedFiles, onFileUpload, loading } = useFileUpload();
 
     return (
         <Box>
@@ -21,7 +21,7 @@ export function FileUpload() {
                     placeholder="File Upload"
                 />
             )}
-            <UploadedFilesList files={filenames} />
+            <UploadedFilesList files={uploadedFiles} />
         </Box>
     );
 }

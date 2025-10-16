@@ -3,7 +3,7 @@ import { postQuery } from "../../api";
 import { useQuery } from "../../QueryContext";
 
 export const useQueryInput = () => {
-    const { setResponse, setLoading } = useQuery();
+    const { setResponse, setLoading, setFileNamesList } = useQuery();
     const [query, setQuery] = useState("");
     const onQueryChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
         setQuery(event.target.value);
@@ -13,7 +13,8 @@ export const useQueryInput = () => {
         const response = await postQuery(query);
         console.log(response);
         // set context
-        setResponse(response);
+        setResponse(response.answer);
+        setFileNamesList(response.citations);
         setLoading(false);
     }
     return { query, onQueryChange, onQuerySubmit };

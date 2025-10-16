@@ -1,13 +1,13 @@
 const API = import.meta.env.VITE_API_BASE_URL || "http://localhost:8000";
 
 export async function health() {
-    const r = await fetch(`${API}/health`);
+    const r = await fetch(`${API}/health`, { credentials: "include" });
     if (!r.ok) throw new Error("health_failed");
     return r.json();
 }
 
 export async function getFiles() {
-    const r = await fetch(`${API}/uploads`);
+    const r = await fetch(`${API}/uploads`, { credentials: "include" });
     if (!r.ok) throw new Error("getFiles_failed");
     return r.json();
 }
@@ -19,6 +19,7 @@ export async function postFile(file: File) {
     const r = await fetch(`${API}/upload_document`, {
         method: "POST",
         body: form,
+        credentials: "include",
     });
     if (!r.ok) throw new Error("postFile_failed");
     return r.json();
@@ -30,6 +31,7 @@ export async function postQuery(query: string) {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({query}),
+        credentials: "include",
     });
     if (!r.ok) throw new Error("postQuery_failed");
     return r.json();

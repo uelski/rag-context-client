@@ -4,7 +4,7 @@ import { postFile } from "../../api";
 export const useFileUpload = () => {
     const [loading, setLoading] = useState(false);
     const [files, setFiles] = useState<File[]>([]);
-    const [filenames, setFilenames] = useState<string[]>([]);
+    const [uploadedFiles, setUploadedFiles] = useState<string[]>([]);
     const onFileUpload = async (files: File[]) => {
         // loop through files and upload them
         setLoading(true);
@@ -13,7 +13,7 @@ export const useFileUpload = () => {
                 const response = await postFile(file);
                 console.log(response);
                 setFiles(prev => [...prev, file]);
-                setFilenames(prev => [...prev, response.file]);
+                setUploadedFiles(prev => [...prev, response.file]);
             }
         } catch (error) {
             console.error(error);
@@ -21,5 +21,5 @@ export const useFileUpload = () => {
             setLoading(false);
         }
     }
-    return { files, filenames, onFileUpload, loading };
+    return { files, uploadedFiles, onFileUpload, loading };
 }

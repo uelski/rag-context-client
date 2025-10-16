@@ -7,10 +7,11 @@ type QueryContextType = {
   response: string;
   setResponse: (r: string) => void;
 
-  filenames: string[];
-  addFilename: (name: string) => void;
-  removeFilename: (name: string) => void;
-  clearFilenames: () => void;
+  fileNames: string[];
+  addFileName: (name: string) => void;
+  removeFileName: (name: string) => void;
+  setFileNamesList: (names: string[]) => void;
+  clearFileNames: () => void;
 
   clearAll: () => void;
 
@@ -23,26 +24,29 @@ const QueryContext = createContext<QueryContextType | undefined>(undefined);
 export const QueryProvider: React.FC<React.PropsWithChildren> = ({ children }) => {
   const [query, setQuery] = useState("");
   const [response, setResponse] = useState("");
-  const [filenames, setFilenames] = useState<string[]>([]);
+  const [fileNames, setFileNames] = useState<string[]>([]);
   const [loading, setLoading] = useState(false);
-  const addFilename = (name: string) => {
+  const addFileName = (name: string) => {
     const trimmed = name.trim();
     if (!trimmed) return;
-    setFilenames(prev =>
+    setFileNames(prev =>
       prev.includes(trimmed) ? prev : [...prev, trimmed]
     );
   };
 
-  const removeFilename = (name: string) => {
-    setFilenames(prev => prev.filter(f => f !== name));
+  const setFileNamesList = (names: string[]) => {
+    setFileNames(names);
+  };
+  const removeFileName = (name: string) => {
+    setFileNames(prev => prev.filter(f => f !== name));
   };
 
-  const clearFilenames = () => setFilenames([]);
+  const clearFileNames = () => setFileNames([]);
 
   const clearAll = () => {
     setQuery("");
     setResponse("");
-    setFilenames([]);
+    setFileNames([]);
     setLoading(false);
   };
 
@@ -52,15 +56,16 @@ export const QueryProvider: React.FC<React.PropsWithChildren> = ({ children }) =
       setQuery,
       response,
       setResponse,
-      filenames,
-      addFilename,
-      removeFilename,
-      clearFilenames,
+      fileNames,
+      setFileNamesList,
+      addFileName,
+      removeFileName,
+      clearFileNames,
       clearAll,
       loading,
       setLoading,
     }),
-    [query, response, filenames, loading]
+    [query, response, fileNames, loading]
   );
 
   return <QueryContext.Provider value={value}>{children}</QueryContext.Provider>;
