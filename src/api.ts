@@ -28,7 +28,8 @@ export async function postFile(file: File) {
 export async function postQuery(query: string) {
     const r = await fetch(`${API}/query_documents`, {
         method: "POST",
-        body: JSON.stringify({q: query}),
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({query}),
     });
     if (!r.ok) throw new Error("postQuery_failed");
     return r.json();
