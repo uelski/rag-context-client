@@ -1,4 +1,4 @@
-const API = import.meta.env.VITE_API_BASE_URL || "localhost:8000";
+const API = import.meta.env.VITE_API_BASE_URL || "http://localhost:8000";
 
 export async function health() {
     const r = await fetch(`${API}/health`);
@@ -6,11 +6,19 @@ export async function health() {
     return r.json();
 }
 
+export async function getFiles() {
+    const r = await fetch(`${API}/uploads`);
+    if (!r.ok) throw new Error("getFiles_failed");
+    return r.json();
+}
+
 // post a file
 export async function postFile(file: File) {
+    const form = new FormData();
+    form.append("file", file);
     const r = await fetch(`${API}/upload_document`, {
         method: "POST",
-        body: file,
+        body: form,
     });
     if (!r.ok) throw new Error("postFile_failed");
     return r.json();

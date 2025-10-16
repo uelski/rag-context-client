@@ -8,13 +8,18 @@ export const useFileUpload = () => {
     const onFileUpload = async (files: File[]) => {
         // loop through files and upload them
         setLoading(true);
-        for (const file of files) {
-            const response = await postFile(file);
-            console.log(response);
-            setFiles(prev => [...prev, file]);
-            setFilenames(prev => [...prev, response.filename]);
+        try {
+            for (const file of files) {
+                const response = await postFile(file);
+                console.log(response);
+                setFiles(prev => [...prev, file]);
+                setFilenames(prev => [...prev, response.file]);
+            }
+        } catch (error) {
+            console.error(error);
+        } finally {
+            setLoading(false);
         }
-        setLoading(false);
     }
     return { files, filenames, onFileUpload, loading };
 }
