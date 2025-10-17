@@ -11,7 +11,6 @@ export const useQueryInput = () => {
     const onQuerySubmit = async () => {
         setLoading(true);
         const response = await postQuery(query);
-        console.log(response);
         // set context
         setResponse(response.answer);
         setFileNamesList(response.citations);
