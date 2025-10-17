@@ -1,25 +1,24 @@
 import { useState } from "react";
 import { postFile } from "../../api";
+import { useFiles } from "../../hooks";
 
 export const useFileUpload = () => {
     const [loading, setLoading] = useState(false);
-    const [files, setFiles] = useState<File[]>([]);
-    const [uploadedFiles, setUploadedFiles] = useState<string[]>([]);
+    const { uploadedFiles, loading: loadingFiles, refetch } = useFiles()
+    
     const onFileUpload = async (files: File[]) => {
         // loop through files and upload them
         setLoading(true);
         try {
             for (const file of files) {
-                const response = await postFile(file);
-                console.log(response);
-                setFiles(prev => [...prev, file]);
-                setUploadedFiles(prev => [...prev, response.file]);
+                await postFile(file);
             }
+            await refetch()
         } catch (error) {
             console.error(error);
         } finally {
             setLoading(false);
         }
     }
-    return { files, uploadedFiles, onFileUpload, loading };
+    return { uploadedFiles, onFileUpload, loading, loadingFiles };
 }

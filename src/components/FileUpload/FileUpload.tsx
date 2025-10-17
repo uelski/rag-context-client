@@ -4,7 +4,7 @@ import { UploadedFilesList } from "../";
 
 export function FileUpload() {
 
-    const { files, uploadedFiles, onFileUpload, loading } = useFileUpload();
+    const { uploadedFiles, onFileUpload, loading, loadingFiles } = useFileUpload();
 
     return (
         <Box>
@@ -14,14 +14,15 @@ export function FileUpload() {
                 <FileInput 
                     c="white"
                     multiple
-                    value={files}
+                    // value={files}
+                    value={[]}
                     onChange={onFileUpload}
                     label="Upload one or more files"
                     description="Files uploaded here will be added to the context of the RAG model."
                     placeholder="File Upload"
                 />
             )}
-            <UploadedFilesList files={uploadedFiles} />
+            <UploadedFilesList loading={loadingFiles} files={uploadedFiles} />
         </Box>
     );
 }
