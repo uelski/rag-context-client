@@ -1,4 +1,4 @@
-const API = import.meta.env.VITE_API_BASE_URL || "http://localhost:8000";
+const API = import.meta.env.VITE_API_BASE_URL || "https://rag-api-agcfrxhq4q-uc.a.run.app";
 
 export async function health() {
     const r = await fetch(`${API}/health`, { credentials: "include" });

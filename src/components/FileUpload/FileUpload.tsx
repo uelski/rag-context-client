@@ -1,4 +1,4 @@
-import { Box, FileInput, Flex, Text, Title, Loader } from "@mantine/core";
+import { Box, FileInput, Title, Loader } from "@mantine/core";
 import { useFileUpload } from "./useFileUpload";
 import { UploadedFilesList } from "../";
 
