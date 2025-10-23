@@ -10,13 +10,20 @@ export function UploadedFilesList({ files, loading }: { files: FileUpload[], loa
     return (
         <Box>
             <Title mb="sm" mt="md" fz="xl" c="white">Uploaded Files:</Title>
-            <Text mb="sm" mt="md" c="white">{files.length} files uploaded</Text>
-            {loading ? <Loader color="white" /> : (
-                <List>
-                {files.map((file: FileUpload) => (
-                        <ListItem c="white" key={file.doc_id}>{file.filename} - {file.page_number} - {file.chunks} chunks</ListItem>
-                    ))}
-                </List>
+            {loading ? (
+                <Box>
+                    <Loader color="white" />
+                    <Text c="white">Loading files...</Text>
+                </Box>
+            ) : (
+                <>
+                    <Text mb="sm" mt="md" c="white">{files.length} files uploaded</Text>
+                    <List>
+                    {files.map((file: FileUpload) => (
+                            <ListItem c="white" key={file.doc_id}>{file.filename} - {file.page_number} - {file.chunks} chunks</ListItem>
+                        ))}
+                    </List>
+                </>
             )}
         </Box>
     );
